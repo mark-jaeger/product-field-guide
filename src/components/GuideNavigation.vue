@@ -1,7 +1,12 @@
 <template>
   <div>
     <select>
-      <option v-bind:key="step.id" v-for="step in steps">
+      <option
+       v-bind:key="step.data.id" 
+       v-for="step in steps" 
+       v-bind:value="step.id"
+       v-model="guideStep"
+       >
         {{ PrismicDOM.RichText.asText(step.data.title) }}
       </option>
     </select>
@@ -17,6 +22,11 @@ export default {
     PrismicDOM: Object,
     Prismic: Object,
   },
+  data: function() {
+    return {
+      guideStep: false
+    }
+  }
 };
 </script>
 

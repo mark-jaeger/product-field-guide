@@ -1,20 +1,21 @@
 <template>
   <div class="guide">
-    <GuideNavigation
-      v-bind:steps="steps"
-      v-bind:Prismic="Prismic"
-      v-bind:PrismicDOM="PrismicDOM"></GuideNavigation>
-
+    <select v-model="currentStepId">
+      <option
+       v-bind:key="step.data.id" 
+       v-for="step in steps" 
+       v-bind:value="step.id">
+        {{ PrismicDOM.RichText.asText(step.data.title) }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GuideStep from '@/components/GuideStep.vue';
-import GuideNavigation from '@/components/GuideNavigation.vue';
-
-const Prismic = require('prismic-javascript');
-const PrismicDOM = require('prismic-dom');
+const Prismic = require('prismic-javascript')
+const PrismicDOM = require('prismic-dom')
+const currentStepId = null
 
 export default {
   name: 'home',
@@ -23,6 +24,7 @@ export default {
       Prismic,
       PrismicDOM,
       steps: [],
+      currentStepId
     };
   },
   methods: {
@@ -31,19 +33,15 @@ export default {
 
       Prismic.getApi(this.$prismicApiEndpoint, { accessToken: this.$prismicAccessToken }).then(api => api.query(
         Prismic.Predicates.at('document.type', 'step'),
-        { orderings: '[product.price desc]' },
+        { orderings: '[my.step.step_number]' },
       )).then((response) => {
-        console.log('Results: ', response.results);
         $this.steps = response.results;
+        this.currentStepId = response.results[0].id
       }, (err) => {
         console.log('Something went wrong: ', err);
         return [];
       });
     },
-  },
-  components: {
-    GuideStep,
-    GuideNavigation,
   },
   beforeMount() {
     this.loadSteps();

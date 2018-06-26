@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: 'Headline'
-}
+  name: 'Headline',
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

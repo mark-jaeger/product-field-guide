@@ -1,61 +1,56 @@
-'use strict'
-
 <template>
   <div class="guide">
-    <GuideNavigation 
+    <GuideNavigation
       v-bind:steps="steps"
       v-bind:Prismic="Prismic"
       v-bind:PrismicDOM="PrismicDOM"></GuideNavigation>
-    
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GuideStep from '@/components/GuideStep.vue'
-import GuideNavigation from '@/components/GuideNavigation.vue'
+import GuideStep from '@/components/GuideStep.vue';
+import GuideNavigation from '@/components/GuideNavigation.vue';
 
-let Prismic = require('prismic-javascript')
-let PrismicDOM = require('prismic-dom')
+const Prismic = require('prismic-javascript');
+const PrismicDOM = require('prismic-dom');
 
 export default {
   name: 'home',
-  data: function(){
+  data() {
     return {
-      Prismic: Prismic,
-      PrismicDOM: PrismicDOM,
-      steps: []
-    }
+      Prismic,
+      PrismicDOM,
+      steps: [],
+    };
   },
   methods: {
-    loadSteps: function(){
+    loadSteps() {
+      const apiEndpoint = 'https://product-field-guide.cdn.prismic.io/api/v2';
+      const apiToken = 'MC5XeU8yMUNRQUFHQ05UcXhZ.ae-_ve-_ve-_vXtOBO-_vR3vv71GLe-_ve-_vVdC77-9de-_vWDvv71pXXMqCe-_ve-_ve-_vVFD77-9';
 
-      let apiEndpoint = "https://product-field-guide.cdn.prismic.io/api/v2"
-      let apiToken = "MC5XeU8yMUNRQUFHQ05UcXhZ.ae-_ve-_ve-_vXtOBO-_vR3vv71GLe-_ve-_vVdC77-9de-_vWDvv71pXXMqCe-_ve-_ve-_vVFD77-9"
 
+      const $this = this;
 
-      let $this = this
-
-      Prismic.getApi(apiEndpoint, {accessToken: apiToken}).then(function(api) {
-        return api.query(
-          Prismic.Predicates.at('document.type', 'step'),
-          { orderings : '[product.price desc]' }
-        )
-      }).then(function(response) {
-        console.log("Results: ", response.results)
+      Prismic.getApi(apiEndpoint, { accessToken: apiToken }).then(api => api.query(
+        Prismic.Predicates.at('document.type', 'step'),
+        { orderings: '[product.price desc]' },
+      )).then((response) => {
+        console.log('Results: ', response.results);
         $this.steps = response.results;
-      }, function(err) {
-        console.log("Something went wrong: ", err)
-        return []
-      })
-    }
+      }, (err) => {
+        console.log('Something went wrong: ', err);
+        return [];
+      });
+    },
   },
   components: {
     GuideStep,
-    GuideNavigation
+    GuideNavigation,
   },
-  beforeMount(){
+  beforeMount() {
     this.loadSteps();
-  }
-}
+  },
+};
 </script>

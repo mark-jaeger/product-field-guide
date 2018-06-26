@@ -1,7 +1,7 @@
 <template>
   <div>
     <select>
-      <option v-for="step in steps">
+      <option v-bind:key="step.id" v-for="step in steps">
         {{ PrismicDOM.RichText.asText(step.data.title) }}
       </option>
     </select>
@@ -13,11 +13,11 @@
 export default {
   name: 'GuideNavigation',
   props: {
-      steps: Array,
-      PrismicDOM: Object,
-      Prismic: Object
-  }
-}
+    steps: Array,
+    PrismicDOM: Object,
+    Prismic: Object,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

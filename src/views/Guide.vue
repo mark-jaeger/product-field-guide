@@ -27,13 +27,9 @@ export default {
   },
   methods: {
     loadSteps() {
-      const apiEndpoint = 'https://product-field-guide.cdn.prismic.io/api/v2';
-      const apiToken = 'MC5XeU8yMUNRQUFHQ05UcXhZ.ae-_ve-_ve-_vXtOBO-_vR3vv71GLe-_ve-_vVdC77-9de-_vWDvv71pXXMqCe-_ve-_ve-_vVFD77-9';
-
-
       const $this = this;
 
-      Prismic.getApi(apiEndpoint, { accessToken: apiToken }).then(api => api.query(
+      Prismic.getApi(this.$prismicApiEndpoint, { accessToken: this.$prismicAccessToken }).then(api => api.query(
         Prismic.Predicates.at('document.type', 'step'),
         { orderings: '[product.price desc]' },
       )).then((response) => {

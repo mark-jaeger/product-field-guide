@@ -11,12 +11,15 @@
 
 $primary-color: #304FFE
 
+body
+  margin: 0
+  padding: 0
+
 #app
   font-family: 'Cabin', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   color: #2c3e50
-  padding: 32px
   line-height: 1.333
   font-size: 24px
 

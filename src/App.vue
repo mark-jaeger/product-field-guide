@@ -3,8 +3,7 @@
     <router-view/>
   </div>
 </template>
-<script>
-</script>
+
 <style lang="sass">
 @import url('https://fonts.googleapis.com/css?family=Cabin:400,700')
 @import url("https://use.typekit.net/vqa3zmx.css")

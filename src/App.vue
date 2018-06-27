@@ -16,7 +16,6 @@ body {
 }
 
 .app {
-  color: $primary-color;
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
   font-size: 24px;
   line-height: 1.333;

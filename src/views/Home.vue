@@ -39,7 +39,8 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
-.email
-  width: 100%
+<style scoped lang="scss">
+.email {
+  width: 100%;
+}
 </style>

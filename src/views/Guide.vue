@@ -4,8 +4,8 @@
       <nav>
         <select v-model="currentStepUid" v-on:change="changeStep">
             <option
-            v-bind:key="step.data.uid" 
-            v-for="step in steps" 
+            v-bind:key="step.data.uid"
+            v-for="step in steps" f
             v-bind:value="step.uid">
               {{ PrismicDOM.RichText.asText(step.data.title) }}
             </option>
@@ -25,10 +25,10 @@
 <script>
   // @ is an alias to /src
   import Headline from '@/components/Headline.vue';
-  
+
   const Prismic = require('prismic-javascript')
   const PrismicDOM = require('prismic-dom')
-  
+
   export default {
     name: 'home',
     data() {
@@ -43,7 +43,7 @@
     methods: {
       loadSteps() {
         const $this = this;
-  
+
         Prismic.getApi(this.$prismicApiEndpoint, {
           accessToken: this.$prismicAccessToken
         }).then(api => api.query(
@@ -60,7 +60,7 @@
       },
       setStep(stepUid) {
         this.currentStepUid = stepUid
-  
+
         Prismic.getApi(this.$prismicApiEndpoint, {
           accessToken: this.$prismicAccessToken
         }).then(api => api.getByUID(
@@ -85,26 +85,31 @@
   };
 </script>
 
-<style lang="sass" scoped>
-.guide
-  display: flex
-  flex-wrap: nowrap
-  justify-content: space-between
-  align-items: stretch
-  align-content: stretch
+<style lang="scss" scoped>
+.guide {
+  align-content: stretch;
+  align-items: stretch;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
 
-.instructions
-  flex-grow: 0
-  flex-shrink: 0
-  width: 20em
-  padding: 2em
-  height: 100%
+.instructions {
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 100%;
+  padding: 2em;
+  width: 20em;
+}
 
-.editor
-  flex-grow: 1
-  iframe
-    height: 100%
-    weight: 100%
-    border: 0
+.editor {
+  flex-grow: 1;
+
+  iframe {
+    border: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
 
 </style>
